@@ -34,7 +34,23 @@ matches = re.findall(r'NIFTY(\d{5})\d{4,5}(CE|PE)', r.text)
 
 latest_expiry = matches[0][0]
 
-print("Latest Expiry:", latest_expiry)
+# -------- FORMAT EXPIRY DATE --------
+
+year = "20" + latest_expiry[0:2]
+month = latest_expiry[2]
+day = latest_expiry[3:5]
+
+month_map = {
+    "1":"Jan","2":"Feb","3":"Mar","4":"Apr","5":"May","6":"Jun",
+    "7":"Jul","8":"Aug","9":"Sep","O":"Oct","N":"Nov","D":"Dec"
+}
+
+month_name = month_map.get(month, month)
+
+expiry_date = f"{day} {month_name} {year}"
+
+
+print("Expiry Date:", expiry_date)
 
 
 # -------- GET NIFTY OPEN --------
@@ -78,7 +94,7 @@ print("NIFTY OPEN:", nifty_open)
 
 print("ATM STRIKE:", atm_strike)
 
-print("Tracking:", ce_symbol, "/", pe_symbol)
+
 
 print("CE OPEN:", ce_open)
 
